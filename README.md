@@ -12,7 +12,7 @@ The main use for this prefab is to create "Radio Buttons", meaning only one butt
 Buttons group in action, with exclusive selection turned on.
 
 
-![Non-Exclusive Selection](img/buttons-group_nonexclusive.gif)
+![Non-Exclusive Selection](img/buttons-group_nonexclusive.gif)  
 It also supports non exclusive selection.
 
 
@@ -28,6 +28,12 @@ Finally, it is possible to set the first button in the list as on by default.
 ## How to Use
 
 Paste the Prefab and the scripts in your Asset folder, instantiate a ButtonsGroup, set the desired colors and image/material for idle/hover/active states and voila! You're done!
+
+![Inspector View of ButtonsGroup](img/inspector-buttonsGroup.png) 
+Inspector View of Buttons Group
+
+Set bIsExclusive as true to enable exclusive selection.  
+Set bFirstButtonActive to set the first button as active on start.
 
 The buttons objects are not Unity UI buttons, but simple Monobehaviour classes implementing interfaces to detect clicks and hovers (IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler).
 
