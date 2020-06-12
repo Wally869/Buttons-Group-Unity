@@ -6,7 +6,9 @@ This repository contains a prefab and related scripts to create a Buttons group 
 
 It is a group of buttons (duh) with a parent ButtonsGroupController. On clicking a button, the button notifies its parent of the event. The ButtonsGroupController records the new state for the button, and changes the state of other buttons.
 
-The main use for this prefab is to create "Radio Buttons", meaning only one button can be active at a time. The gifs show it working (low quality gifs, will be updated)
+The main use for this prefab is to create "Radio Buttons", meaning only one button can be active at a time. The gifs show it working (low quality gifs, will be updated).
+
+It also enables the developper to have access to different buttons state from a single class instead of checking it from multiple buttons, but the main intent was reusability for UI creation.
 
 ![Exclusive Selection](img/buttons-group_exclusive.gif)  
 Buttons group in action, with exclusive selection turned on.
@@ -29,7 +31,7 @@ Finally, it is possible to set the first button in the list as on by default.
 
 Paste the Prefab and the scripts in your Asset folder, instantiate a ButtonsGroup, set the desired colors and image/material for idle/hover/active states and voila! You're done!
 
-![Inspector View of ButtonsGroup](img/inspector-buttonsGroup.png) 
+![Inspector View of ButtonsGroup](img/inspector-buttonsGroup.png)   
 Inspector View of Buttons Group
 
 Set bIsExclusive as true to enable exclusive selection.  
