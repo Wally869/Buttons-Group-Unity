@@ -2,11 +2,17 @@
 
 This repository contains a prefab and related scripts to create a Buttons group for Unity.
 
+## Support 
+
+This asset was created and tested on 2019.3.0f3 Personal with the Standard Rendering Pipeline.
+
+I don't think there will be any issues with other versions, but if you encounter a problem please create an issue/pr.
+
 ## What is a Buttons Group?
 
 It is a group of buttons (duh) with a parent ButtonsGroupController. On clicking a button, the button notifies its parent of the event. The ButtonsGroupController records the new state for the button, and changes the state of other buttons.
 
-The main use for this prefab is to create "Radio Buttons", meaning only one button can be active at a time. The gifs show it working (low quality gifs, will be updated).
+The main use for this prefab is to create "Radio Buttons", meaning only one button can be active at a time. The gifs shows it working (low quality gifs, will be updated).
 
 It also enables the developper to have access to different buttons state from a single class instead of checking it from multiple buttons, but the main intent was reusability for UI creation.
 
