@@ -6,7 +6,7 @@ This repository contains a prefab and related scripts to create a Buttons group 
 
 This asset was created and tested on 2019.3.0f3 Personal with the Standard Rendering Pipeline.
 
-I don't think there will be any issues with other versions, but if you encounter a problem please create an issue/pr.
+I don't think there will be any issues with other versions, but if you encounter a problem please create an issue/pr so I can check it out.
 
 ## What is a Buttons Group?
 
@@ -23,6 +23,9 @@ Buttons group in action, with exclusive selection turned on.
 ![Non-Exclusive Selection](img/buttons-group_nonexclusive.gif)  
 It also supports non exclusive selection.
 
+
+![Radio Button Selection](img/buttons-group_radio.gif)  
+It can also work as a radio button with bEnforceOneActive as false and bIsExclusive as true
 
 ## Features
 
@@ -47,8 +50,19 @@ The buttons objects are not Unity UI buttons, but simple Monobehaviour classes i
 
 To interface with another class, such as a GameManager, you can access the current active states of button by using the method GetListActiveButtons of the ButtonsGroupControl class.
 
-## Usage Notes
+## Additional Usage Notes
 
-IMPORTANT: this implementation allows having no active buttons.
+This implementation both allows or disallows having no active buttons, depending on the parameters you set.
+
+The Initialization logic is contained in the method "RegisterElements" of ButtonsGroupController.cs. This is to allow registering buttons added at runtime if needed.
+
+
+## Documentation
+
+The code is very straightforward so I do not include any documentation.  
+Call the method GetListActiveButtons to get a boolean list of status for buttons (basically returns "is the button selected or not?").  
+
+To interface with your state manager or another class, I would suggest adding a reference to the target component, and calling it in SetColorButtons() to ensure you are sending the most updated state and not an intermediate dirty state. I left comments from my own code calling _mBattleController as a guide to how you could proceed to implement this.
+
 
 

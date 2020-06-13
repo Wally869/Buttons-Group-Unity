@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +15,7 @@ public class ButtonsGroupController : MonoBehaviour
 {
     [Header("Single Or Multiple Active")]
     public bool bIsExclusive = true;
+    public bool bEnforceOneActive = false;
     public bool bFirstButtonActive = false;
 
 
@@ -28,8 +28,14 @@ public class ButtonsGroupController : MonoBehaviour
     private List<ButtonStatus> _mStatuses = new List<ButtonStatus>();
     private int _mNumberButtons;
 
+    //private BattleController _mBattleController;
 
     void Start()
+    {
+        RegisterElements();
+    }
+
+    public void RegisterElements()
     {
         _mNumberButtons = transform.childCount;
         for (int i = 0; i < _mNumberButtons; i++)
@@ -42,8 +48,13 @@ public class ButtonsGroupController : MonoBehaviour
         }
 
         _mStatuses[0] = (bFirstButtonActive) ? ButtonStatus.Active : ButtonStatus.Idle;
+        if (bEnforceOneActive)
+        {
+            _mStatuses[0] = ButtonStatus.Active;
+        }
 
         SetColorButtons();
+
     }
 
 
@@ -64,13 +75,31 @@ public class ButtonsGroupController : MonoBehaviour
             _mButtons[i].GetComponent<Image>().color = buttonColor;
         }
 
+
+        // Put the call to the state manager in this call to send latest state?
+        //_mBattleController.NotifyChangeStateMainControls(GetListActiveButtons());
     }
 
     public void NotifySelection(int idButton)
     {
+        bool isDirty = false;
+
         if (_mStatuses[idButton] == ButtonStatus.Active)
         {
-            _mStatuses[idButton] = ButtonStatus.Idle;
+            if (bEnforceOneActive)
+            {
+                if (GetNumberActive() > 1)
+                {
+                    isDirty = true;
+                    _mStatuses[idButton] = ButtonStatus.Idle;
+
+                }
+            } else
+            {
+                isDirty = true;
+                _mStatuses[idButton] = ButtonStatus.Idle;
+            }
+
         } else
         {
             if (bIsExclusive)
@@ -81,9 +110,14 @@ public class ButtonsGroupController : MonoBehaviour
                 }
             }
             _mStatuses[idButton] = ButtonStatus.Active;
+            isDirty = true;
         }
 
-        SetColorButtons();
+        if (isDirty)
+        {
+            SetColorButtons();
+
+        }
     }
 
     public void NotifyHovering(int idButton)
@@ -114,5 +148,19 @@ public class ButtonsGroupController : MonoBehaviour
         }
 
         return activeButtons;
+    }
+
+    public int GetNumberActive()
+    {
+        int nbActive = 0;
+        foreach (ButtonStatus status in _mStatuses)
+        {
+            if (status == ButtonStatus.Active)
+            {
+                nbActive++;
+            }
+        }
+
+        return nbActive;
     }
 }
